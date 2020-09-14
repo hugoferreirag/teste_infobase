@@ -46,7 +46,14 @@ REQUEST BODY
         }
     ]
     }
-
+RESPONSE:
+{
+    "id": "5f5f600b9fcb53001741744e",
+    "data_criacao": "14/09/2020 12:20:27",
+    "data_atualizacao": "14/09/2020 12:20:27",
+    "ultimo_login": "14/09/2020 12:20:27",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN0ZXZhbkBnbWFpbC5jb20iLCJpYXQiOjE2MDAwODYwMjd9.F_fUOqBgxLTl7Od1ibS1h4h3g8hkLG4NGtpGLrCmqDc"
+}
 ```
 ##### Endpoint para acessar o sistema "LOGIN"
 ```
@@ -56,6 +63,15 @@ REQUEST BODY
 {
 email: algumemail@gmail.com,
 password: senha123
+}
+
+RESPONSE:
+{
+    "id": "5f5f600b9fcb53001741744e",
+    "data_criacao": "14/09/2020 12:20:27",
+    "data_atualizacao": "14/09/2020 12:20:27",
+    "ultimo_login": "14/09/2020 12:20:50",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN0ZXZhbkBnbWFpbC5jb20iLCJpYXQiOjE2MDAwODYwMjd9.F_fUOqBgxLTl7Od1ibS1h4h3g8hkLG4NGtpGLrCmqDc"
 }
 ```
 ##### Endpoint para buscar usuario
@@ -68,6 +84,26 @@ url: https://infobaseteste.herokuapp.com/finduser/:user_id
 
 REQUEST BODY 
 {}
+
+RESPONSE:
+{
+    "user_id": "5f5f600b9fcb53001741744e",
+    "nome": "stevan",
+    "email": "stevan@gmail.com",
+    "telefones": [
+        {
+            "number": "999-3455",
+            "ddd": "11"
+        },
+        {
+            "number": "999-3455",
+            "ddd": "11"
+        }
+    ],
+    "data_criacao": "14/09/2020 12:20:27",
+    "data_atualizacao": "14/09/2020 12:21:27",
+    "ultimo_login": "14/09/2020 12:21:27"
+}
 ```
 
 
