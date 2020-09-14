@@ -15,12 +15,12 @@ OBS: utlizei a lib "Nodemon" instalado globalmente em desenvolvimento.
 ### Configuração dotEnv: Configurar .env inserindo a porta que o sistema ira rodar e o link para o banco de dados mongoDB, exemplo:
 ```
 PORT='NUMERO_DA_PORTA'
-DB=http://url_do_banco_de_dados/nome_do_banco
+DB=URL_DO_CLUSTER_MONGO_DB
 ```
 
 ### Ferramentas utilizadas:
 ```
-Node.js, Javascript, Express, cors, bodyParser, bcrypt, jsonwebtoken.
+Node.js, Javascript, Express, cors, bodyParser, bcrypt, jsonwebtoken e moment.js.
 ```
 
 ### Endpoint de Authenticação e Usuários para acesso
