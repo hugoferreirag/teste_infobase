@@ -1,3 +1,5 @@
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable camelcase */
 /* eslint-disable no-throw-literal */
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
