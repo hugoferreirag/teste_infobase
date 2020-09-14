@@ -5,7 +5,7 @@ const authService = require('../services/auth');
 const userServices = require('../services/user');
 const authMiddleware = require('../middlewares/auth');
 
-routers.post('/', (req, res) => {
+routers.get('/', (req, res) => {
   res.json('Application running');
 });
 routers.post('/signin', (req, res) => {
