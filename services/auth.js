@@ -9,8 +9,8 @@ const userService = {
     try {
       const user = await users.findOne({ email }).select('+password');
 
-      if (!user) throw { mensagem: 'Usuário e/ou senha inválidos', status: 401 };
-      if (!bcrypt.compareSync(password, user.password)) throw { mensagem: 'Usuário e/ou senha inválidos', status: 401 };
+      if (!user) throw { data: { mensagem: 'Usuário e/ou senha inválidos' }, status: 400 };
+      if (!bcrypt.compareSync(password, user.password)) throw { data: { mensagem: 'Usuário e/ou senha inválidos' }, status: 400 };
 
       user.lastLogin = new Date();
 
@@ -26,7 +26,7 @@ const userService = {
         token: user.token,
       });
     } catch (error) {
-      if (error.status) res.status(error.status).json(error);
+      if (error.status) res.status(error.status).json(error.data);
       else res.status(500).json(error);
     }
   },

@@ -15,9 +15,9 @@ const userService = {
   create: async (req, res) => {
     const payload = req.body;
     try {
-      if (!payload.name || payload.name.length < 4) throw { mensagem: 'Informe um nome válido, nome deve conter pelo menos 4 caracteres', status: 400 };
-      if (!payload.password || payload.password.length < 4) throw { mensagem: 'Informe uma senha válida, senha deve conter pelo menos 4 caracteres', status: 400 };
-      if (!payload.email) throw { msg: 'Informe um email válida', status: 400 };
+      if (!payload.name || payload.name.length < 4) throw { data: { mensagem: 'Informe um nome válido, nome deve conter pelo menos 4 caracteres' }, status: 400 };
+      if (!payload.password || payload.password.length < 4) throw { data: { mensagem: 'Informe uma senha válida, senha deve conter pelo menos 4 caracteres' }, status: 400 };
+      if (!payload.email) throw { data: { mensagem: 'Informe um email válida' }, status: 400 };
 
       const token = generateToken({ email: payload.email });
 
@@ -32,7 +32,7 @@ const userService = {
       };
 
       const existsUser = await user.findOne({ email: newUser.email });
-      if (existsUser) throw { mensagem: 'Email já existente', status: 400 };
+      if (existsUser) throw { data: { mensagem: 'Email já existente' }, status: 400 };
       const data = await user.create(newUser);
       res.status(201).json({
         id: data._id,
@@ -42,22 +42,22 @@ const userService = {
         token: data.token,
       });
     } catch (error) {
-      if (error) res.status(error.status).json(error);
-      else res.status(500).json(error.response);
+      if (error.status) res.status(error.status).json(error.data);
+      else res.status(500).json(error);
     }
   },
   findUser: async (req, res) => {
     const { user_id } = req.params;
     try {
-      if (!user_id) throw { mensagem: 'user_id não informado', status: 401 };
+      if (!user_id) throw { data: { mensagem: 'user_id não informado' }, status: 400 };
 
       const existsUser = await user.findOne({ _id: user_id });
 
-      if (!existsUser) throw { mensagem: 'user_id não existe', status: 401 };
-      if (existsUser.token !== req.token) throw { mensagem: 'Não Autorizado', status: 403 };
+      if (!existsUser) throw { data: { mensagem: 'user_id não existe' }, status: 400 };
+      if (existsUser.token !== req.token) throw { data: { mensagem: 'Não Autorizado' }, status: 403 };
       const dateNow = new Date();
       const compareDates = moment(dateNow).diff(existsUser.lastLogin, 'minutes') < 30;
-      if (!compareDates) throw { mensagem: 'Sessão inválida', status: 403 };
+      if (!compareDates) throw { data: { mensagem: 'Sessão inválida' }, status: 403 };
       existsUser.token = undefined;
       res.status(200).json({
         user_id: existsUser._id,
@@ -69,7 +69,7 @@ const userService = {
         ultimo_login: moment(existsUser.lastLogin).format('DD/MM/YYYY hh:mm:ss'),
       });
     } catch (error) {
-      if (error.status) res.status(error.status).json(error);
+      if (error.status) res.status(error.status).json(error.data);
       else res.status(500).json(error);
     }
   },
